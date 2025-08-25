@@ -3,6 +3,7 @@
 #include "exec.hpp"
 
 int main(void) {
+	loadHistoryFromConf();
 	while (1) {
 		if (readlineEOFFlag) break;
 		char code_line[MAX_CODE_SIZE];
