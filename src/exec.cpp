@@ -26,8 +26,8 @@ namespace execOwenSQL {
 		std::string restArgs;
 		if (argsSize > 1) 
 			restArgs = std::accumulate(
-        			std::next(args.begin(), 2), args.end(), args[1],
-        			[](std::string a, const std::string& b) { return std::move(a) + " " + b; });
+				std::next(args.begin(), 2), args.end(), args[1],
+				[](std::string a, const std::string& b) { return std::move(a) + " " + b; });
 		if (args[0] == "use") {
 			if (argsSize < 2) {
 				std::cerr << "use needs second argument" << std::endl; 

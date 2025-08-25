@@ -32,11 +32,11 @@ namespace sqlite3Backend {
 		}
 
 		const char* sql = R"(
-        		CREATE TABLE IF NOT EXISTS users (
-            			id INTEGER PRIMARY KEY AUTOINCREMENT,
-            			name TEXT
-        		);
-    		)";
+			CREATE TABLE IF NOT EXISTS users (
+				id INTEGER PRIMARY KEY AUTOINCREMENT,
+				name TEXT UNIQUE
+			);
+		)";
 
 		char* errMsg = nullptr;
 		if (sqlite3_exec(db, sql, nullptr, nullptr, &errMsg) != SQLITE_OK) {
