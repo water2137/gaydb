@@ -18,6 +18,7 @@ namespace sqlite3Backend {
 	std::vector<User> loadUsers(void);
 	
 	int saveUser(const std::string& name);
+	int deleteUser(const std::string& name);
 }
 #endif
 

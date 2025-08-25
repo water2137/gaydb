@@ -12,6 +12,8 @@ public:
 	gaysClass();
 	void registerGay(const std::string& name);
 	void registerGayNoSQL(sqlite3Backend::User user);
+	void unregisterGay(const std::string& name);
+	void unregisterGayNoSQL(sqlite3Backend::User user);
 	std::vector<sqlite3Backend::User> getGayList(void);
 };
 extern gaysClass gays;

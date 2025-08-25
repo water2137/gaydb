@@ -96,4 +96,32 @@ namespace sqlite3Backend {
 
 		return lastId;
 	}
+
+	int deleteUser(const std::string& name) {
+		sqlite3_stmt* stmt;
+		const char* sql = "DELETE FROM users WHERE name = ? RETURNING id;";
+
+		if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+			std::cerr << "failed to prepare delete: " << sqlite3_errmsg(db) << "\n";
+			return -1;
+		}
+
+		sqlite3_bind_text(stmt, 1, name.c_str(), -1, SQLITE_TRANSIENT);
+
+		int rc = sqlite3_step(stmt);
+		int deletedId = -1;
+
+		if (rc == SQLITE_ROW) {
+			deletedId = sqlite3_column_int(stmt, 0);
+			std::cout << "user with id = " << deletedId << " deleted\n";
+		} else if (rc == SQLITE_DONE) {
+			std::cerr << "no user with that name\n";
+		} else {
+			std::cerr << "delete failed: " << sqlite3_errmsg(db) << "\n";
+		}
+
+		sqlite3_finalize(stmt);
+		return deletedId;
+	}
+
 }

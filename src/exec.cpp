@@ -52,7 +52,12 @@ namespace execOwenSQL {
 				}
 				gays.registerGay(restArgs);
 			} else if (args[0] == "removeGay") {
-				std::cerr << "ERROR: gays will always be gay" << std::endl;
+				//std::cerr << "ERROR: gays will always be gay" << std::endl;
+				if (argsSize < 2) {
+					std::cerr << "removeGay needs second argument" << std::endl;
+					return;
+				}
+				gays.unregisterGay(restArgs);
 			} else if (args[0] == "showGay") {
 				for (const auto& gay : gays.getGayList())
 					std::cout << gay.name << "\n";
